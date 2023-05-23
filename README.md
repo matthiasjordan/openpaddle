@@ -5,6 +5,8 @@ A Morse paddle project in OpenSCAD.
 It goes without saying but this is free software. If you don't have the TRS jack used in this build, you can change the design to accomodate the TRS jack you want to use. If you think the unit is too small, too large, too long, too short: edit it to suit your needs. You want your call sign embossed? Be my guest.
 
 
+![The bare paddle in a blackish housing](img/paddlefreesolo.jpg)
+
 ## Bill of materials
 
 There is some [additional hardware needed](BOM.txt) to build this project. Some pieces are mandatory to build the paddle but others are optional and can be omitted when certain features are not needed.
@@ -38,4 +40,7 @@ There is some [additional hardware needed](BOM.txt) to build this project. Some 
 ### Options
 
 * [housing.scad](misc/housing.scad) is a sliding housing ripped off the Palm Pico paddles. Just print it, preferrably standing upwards, secured by some brim.
+
+
+![The internals](img/paddleinternals.jpg)
 
