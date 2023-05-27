@@ -29,20 +29,18 @@
 include<common.scad>
 use<paddle.scad>
 use<lib/trsjack_ebs35.scad>
+use<lib/microusbcutout.scad>
 
 
 
 base();
 
-basewidth=width-2*casethickness;
-baselength=length-casethickness;
+//%paddles();
 
 
 
 module base() {
 
-    %paddles();
-    
     baseplate_all();
     paddle_fixtures();
     middle_contact_fixture();
@@ -57,9 +55,18 @@ module base() {
             translate([mechstart+middlescrewdistance, basewidth/2, thickness-0.01]) paddlescrewhole();
             
             $fn=20;
-            for (p = basenutpos) {
+            * for (p = basenutpos) {
                 translate([mechstart+p, basewidth/2, -1]) cylinder(d=2.6, h=8);
             }
+            
+            // Cable duct
+            translate([mechstart+10, basewidth/2, -2.01]) {
+                translate([7, 0, 0]) rotate([0, -45, 0]) cylinder(d=4, 10);
+                translate([0, 0, 0]) rotate([0, 45, 0]) cylinder(d=4, 10);
+            }
+
+        // Hole for stopper screw
+        translate([stopperscrewx, stopperscrewy, 10]) rotate([180,0,0]) screwhole(screwdiam=basescrewdiam, headconeheight=0, headheight=thickness+0.5, shankheight=basescrewheight, headdiam=basescrewheaddiam+0.5);
         }
     }
 
@@ -74,10 +81,22 @@ module base() {
     
     module middle_contact_fixture() {
         // Fixture for middle contact
-        translate([mechstart+middlescrewdistance, basewidth/2, thickness-0.01]) ringWithScrew();
-        %translate([mechstart+middlescrewdistance, basewidth/2, ring_height+thickness-0.01]) {
-                    %translate([0,0,cableshoeheight]) rotate([180,0,180]) cable_shoe(thickness=cableshoeheight, d1=7.5, d2=paddlescrewdiam);
-                    %translate([0,0,0.99]) paddle_nut();
+        ring_heightx=0;
+        translate([mechstart+middlescrewdistance, basewidth/2, thickness-0.01]) {
+            ringWithScrew(h=ring_heightx);
+
+            // Stoppers for cable shoe
+            translate([0, 0, 0]) {
+                $fn=10;
+                cssh=2.5+ring_heightx;
+                translate([-10,-3,0]) cylinder(h=cssh, d=2);
+                translate([-10,3,0]) cylinder(h=cssh, d=2);
+            }
+
+            %translate([0,0,ring_heightx]) {
+                %translate([0,0,cableshoeheight]) rotate([180,0,180]) cable_shoe(thickness=cableshoeheight, d1=7.5, d2=paddlescrewdiam);
+                %translate([0,0,0.99]) paddle_nut();
+            }
         }
     }
 
@@ -112,10 +131,41 @@ module base() {
         translate([grubscrewpos-(pluglength/2), 0, 0]) cube([pluglength, 1.5, 4]);
         translate([grubscrewpos-(pluglength/2), basewidth-plugwidth, 0]) cube([pluglength, plugwidth, 4]);
 
-        for (p = basenutpos) {
+       * for (p = basenutpos) {
             translate([mechstart+p, basewidth/2, thickness-0.01]) {
                 basenut();
             }
+        }
+        
+        
+        // lower skirt
+        f=3;
+        translate([-jacksupportdepth, -casethickness ,-skirtheight+0.01]) difference() {
+            // border
+            cube([length+jacksupportdepth, width, skirtheight]);
+            translate([f, f, -0.01]) cube([length, width-2*f, skirtheight+0.02]);
+            // USB cutout
+            translate([-0.5, width/2, picopcbpos-1.2]) rotate([90,180,90]) microusb_cutout(4);
+
+            // Rail for Pico
+            translate([casethickness, (width-skirtendplatewidth)/2, picopcbpos]) picorailcutout();
+            // Rail for bottom plate
+            translate([casethickness, (width-skirtendplatewidth)/2, 1]) bottomrailcutout();
+            // Space for end plate
+            translate([length, (width-skirtendplatewidth)/2, -0.01]) cube([casethickness+0.01, skirtendplatewidth, skirtheight+0.02]);
+        }
+        
+        module picorailcutout() {
+            cube([length+0.01, skirtendplatewidth, skirtrailheight+skirtrailgap]);
+        }
+        
+        module bottomrailcutout() {
+            cube([length+0.01, skirtendplatewidth, skirtrailheight+0.2]);
+        }
+        
+        module microusbcutout() {
+            usbjackwidth=8;
+            cube([f+0.02, usbjackwidth, 3.3+0.02]);
         }
     }
 
@@ -134,19 +184,10 @@ module base() {
 
     module paddlescrewhole() {
         $fn=20;
-        translate([0,0,basescrewheight-1]) rotate([180, 0, 0]) screwhole(screwdiam=basescrewdiam+0.5, headconeheight=0, headheight=thickness+0.5, shankheight=basescrewheight, headdiam=basescrewheaddiam+0.5);
+        translate([0,0,basescrewheight-1]) rotate([180, 0, 0]) screwhole(screwdiam=basescrewdiam+0.5, headconeheight=0, headheight=thickness+5.5, shankheight=basescrewheight, headdiam=basescrewheaddiam+0.5);
     }
 
 
-    module basenut() {
-        %paddle_nut();
-        r=4.1;
-        difference() {
-            cylinder(r=r, h=2.3);
-            paddle_nut_hole();
-        }
-       translate([0,0,2.29]) cylinder(r=r, h=0.5);    
-    }
 
 
     module xscrew(d, h) {

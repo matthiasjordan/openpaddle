@@ -31,9 +31,10 @@ use<base.scad>
 use<lib/trsjack_ebs35.scad>
 
 
-%translate([0, casethickness, 0]) base();
 
 case();
+//%translate([0, casethickness, 0]) base();
+//%translate([0, casethickness, 0]) paddles();
 
 
 
