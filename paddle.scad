@@ -42,6 +42,8 @@ module paddle(length=paddlelength) {
     offset=1.4;
     springpinheight=3;
     springpindiam=4;
+    topreinforcementheight=3;
+    paddleheighttotal=paddleheight+topreinforcementheight;
 
     hub();
     spring_pin_attached();
@@ -51,7 +53,24 @@ module paddle(length=paddlelength) {
     module main_bar() {
         translate([0,-offset,0]) {
             difference() {
-                translate([0.01, -paddlethickness, 0]) cube([length-paddletiplength, paddlethickness, paddleheight]);
+                union() {
+                    translate([0.01, -paddlethickness, 0]) cube([length-paddletiplength, paddlethickness, paddleheight]);
+                    
+                    // Top reinforcement
+                    {
+                        distfromscrew = 7;
+                        distfromtip=9;
+                        translate([distfromscrew+0.01, -paddlethickness, 0]) cube([length-paddletiplength-distfromscrew-distfromtip, paddlethickness, paddleheight+topreinforcementheight]);
+                    }
+                    
+                    // Side reinforcement
+                    {
+                        railsize=(paddleheight-basescrewheaddiam)/2-0.1;
+                        raillength=10;
+                        translate([paddlelength-paddletiplength-raillength-1, 0, paddleheight-railsize]) cube([raillength, railsize, railsize]);
+                        translate([paddlelength-paddletiplength-raillength-1, 0, 0]) cube([raillength, railsize, railsize]);
+                    }       
+                }
                 
                 // Hole for screw
                 translate([middlescrewdistance, 0.1, paddleheight/2]) rotate([90, 0, 0]) {
@@ -67,7 +86,7 @@ module paddle(length=paddlelength) {
                 }
 
                 // Space for springpin
-                translate([15, 1.0-paddlethickness, paddleheight/2+1]) spring_pin();
+                translate([15, 1.0-paddlethickness, paddleheight/2+1]) spring_pin(0.3);
                 
             }
             
@@ -84,13 +103,15 @@ module paddle(length=paddlelength) {
 
 
     module spring_pin_attached() {
-        translate([15, springpinheight-paddlethickness-offset,paddleheight+springpindiam/2+0.51]) spring_pin();
-        translate([15-1/2,-paddlethickness-offset, paddleheight]) cube([1,1,2]);
+        translate([15, -paddlethickness-offset, paddleheighttotal]) {
+            translate([0, springpinheight, springpindiam/2+0.51]) spring_pin();
+            translate([-1/2, 0, 0]) cube([1, 1, 2]);
+        }
     }
 
 
-    module spring_pin() {
-        rotate([90, 0, 0]) cylinder(d=springpindiam, h=springpinheight);
+    module spring_pin(e=0) {
+        rotate([90, 0, 0]) cylinder(d=springpindiam+e, h=springpinheight);
     }
     
 }
