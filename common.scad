@@ -99,6 +99,8 @@ screwholediam = basescrewdiam+0.1;
 
 lowerheight=5;
 
+fullassemblyheight=caseheight+skirtheight;
+
 
 module paddle_nut() {
     nut1(d1=paddlescrewdiam, s=5, m_max=nutheight);

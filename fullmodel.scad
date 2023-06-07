@@ -32,8 +32,12 @@ use<base.scad>
 use<case.scad>
 use<bottom.scad>
 
-base();
-paddles();
-%translate([0, -casethickness, 0]) case();
-translate([20,0,0]) bottom();
-%pico_context();
+fullmodel();
+
+module fullmodel() {
+    base();
+    paddles();
+    %translate([0, -casethickness, 0]) case();
+    translate([20,0,0]) bottom();
+    %pico_context();
+}

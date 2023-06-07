@@ -26,8 +26,7 @@
 //////////////////////////////////////////////////////////////////////
 
 include<../common.scad>
-use<../case.scad>
-use<../base.scad>
+use<../fullmodel.scad>
 
 housing();
 
@@ -50,15 +49,14 @@ module housing() {
     ball_stopper();
 
     %translate([jacksupportdepth+jackdepth, pad, pad]) {
-        case();
-        translate([0, casethickness, 0]) base();
+        translate([0, casethickness, skirtheight]) fullmodel();
     }    
     
     
     module main_block() {
         difference() {
-            translate([0, -ht, -ht]) cube([housinglength, width+(pad+housingthickness)*2, caseheight+(pad+housingthickness)*2]);
-            translate([-0.05, 0, 0]) cube([housinglength+0.1, width+pad*2, caseheight+pad*2]);
+            translate([0, -ht, -ht]) cube([housinglength, width+(pad+housingthickness)*2, fullassemblyheight+(pad+housingthickness)*2]);
+            translate([-0.05, 0, 0]) cube([housinglength+0.1, width+pad*2, fullassemblyheight+pad*2]);
 
             // Spring thingy
             spring_thingy_length=35;
