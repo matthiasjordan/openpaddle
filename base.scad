@@ -74,10 +74,22 @@ module base() {
     
     module middle_contact_fixture() {
         // Fixture for middle contact
-        translate([mechstart+middlescrewdistance, basewidth/2, thickness-0.01]) ringWithScrew();
-        %translate([mechstart+middlescrewdistance, basewidth/2, ring_height+thickness-0.01]) {
-                    %translate([0,0,cableshoeheight]) rotate([180,0,180]) cable_shoe(thickness=cableshoeheight, d1=7.5, d2=paddlescrewdiam);
-                    %translate([0,0,0.99]) paddle_nut();
+        ring_heightx=0;
+        translate([mechstart+middlescrewdistance, basewidth/2, thickness-0.01]) {
+            ringWithScrew(h=ring_heightx);
+
+            // Stoppers for cable shoe
+            translate([0, 0, 0]) {
+                $fn=10;
+                cssh=2.5+ring_heightx;
+                translate([-10,-3,0]) cylinder(h=cssh, d=2);
+                translate([-10,3,0]) cylinder(h=cssh, d=2);
+            }
+
+            %translate([0,0,ring_heightx]) {
+                %translate([0,0,cableshoeheight]) rotate([180,0,180]) cable_shoe(thickness=cableshoeheight, d1=7.5, d2=paddlescrewdiam);
+                %translate([0,0,0.99]) paddle_nut();
+            }
         }
     }
 
