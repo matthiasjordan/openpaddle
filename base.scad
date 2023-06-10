@@ -32,6 +32,7 @@ use<lib/trsjack_ebs35.scad>
 
 
 
+
 base();
 
 basewidth=width-2*casethickness;
@@ -95,7 +96,7 @@ module base() {
 
     
     module trs_jack_fixture() {
-        cutspace=0.1;
+        cutspace=0.08;
         jacklen=14.3;
         jackwidth=11.6;
         jackheight=6.1;
