@@ -43,8 +43,9 @@ module bottom() {
             translate([0,basewidth,0]) rotate([0, 0, 45]) cube([2,2,edgecutheight], center=true);
         }
 
+        // cut out for rail
         union() {
-            t = casethickness-skirtrailheight+0.01;
+            t = casethickness-skirtrailheight+0.2;
             translate([0,0-0.01,-skirtheight-0.01]) cube([baselength, 1+0.01, t]);
             translate([0,basewidth-1+0.01,-skirtheight-0.01]) cube([baselength, 1+0.01, t]);
             translate([0-0.01,0,-skirtheight-0.01]) cube([1+0.01, basewidth, t]);
@@ -57,7 +58,7 @@ module bottom() {
         }
         
         // Hole for LED
-        translate([5, 16, -skirtheight-0.2]) cylinder(d=0.8, h=casethickness+0.5);
+        translate([5, 16, -skirtheight-0.2]) cylinder(d=1, h=casethickness+0.5);
 
         // Hole for BOOTSEL button
         translate([12, 13.5, -skirtheight-0.2]) cylinder(d=1.5, h=casethickness+0.5);

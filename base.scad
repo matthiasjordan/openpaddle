@@ -102,7 +102,7 @@ module base() {
 
     
     module trs_jack_fixture() {
-        cutspace=0.1;
+        cutspace=0.08;
         jacklen=14.3;
         jackwidth=11.6;
         jackheight=6.1;
@@ -160,7 +160,7 @@ module base() {
         }
         
         module bottomrailcutout() {
-            cube([length+0.01, skirtendplatewidth, skirtrailheight+0.2]);
+            cube([length+0.01, skirtendplatewidth, skirtrailheight+0.4]);
         }
         
         module microusbcutout() {

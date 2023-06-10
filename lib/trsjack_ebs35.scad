@@ -29,6 +29,27 @@
 ebs35();
 
 module ebs35() {
+    
+    echo(str("\n\n",
+    "=============================\n",
+    "Wiring diagram\n",
+    "Jack shown with connector pins facing towards user\n",
+    "\n",
+    "    +-+    \n",
+    "+---------+\n",
+    "|    C    |\n",
+    "|        L|\n",
+    "|  x      |\n",
+    "|R       x|\n",
+    "+---------+\n",
+    "\n\n",
+    "C: center pin\n",
+    "R: right paddle\n",
+    "L: left paddle\n",
+    "x: not connected\n"
+    ));
+    
+    
     $fn=20;
     jackcyllen=3.6;
     len=14.3;
