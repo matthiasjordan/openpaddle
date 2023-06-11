@@ -31,7 +31,6 @@ use<base.scad>
 use<lib/trsjack_ebs35.scad>
 
 
-%translate([0, casethickness, 0]) base();
 
 case();
 
