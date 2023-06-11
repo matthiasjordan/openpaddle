@@ -149,18 +149,7 @@ module base() {
         $fn=20;
         translate([0,0,basescrewheight-1]) rotate([180, 0, 0]) screwhole(screwdiam=basescrewdiam+0.5, headconeheight=0, headheight=thickness+5.5, shankheight=basescrewheight, headdiam=basescrewheaddiam+0.5);
     }
-
-
-    module basenut() {
-        %paddle_nut();
-        r=4.1;
-        difference() {
-            cylinder(r=r, h=2.3);
-            paddle_nut_hole();
-        }
-       translate([0,0,2.29]) cylinder(r=r, h=0.5);    
-    }
-
+    
 
     module xscrew(d, h) {
         $fn=20;

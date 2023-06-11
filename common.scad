@@ -91,3 +91,13 @@ module paddle_nut_hole() {
     $fn=15;
     translate([0,0,-screwholeheight+0.01]) cylinder(d=basescrewdiam, h=screwholeheight);
 }
+
+module basenut() {
+    %paddle_nut();
+    r=4.1;
+    difference() {
+        cylinder(r=r, h=2.3);
+        paddle_nut_hole();
+    }
+   translate([0,0,2.29]) cylinder(r=r, h=0.5);    
+}
