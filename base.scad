@@ -35,7 +35,6 @@ use<lib/microusbcutout.scad>
 
 base();
 
-//%paddles();
 
 
 
@@ -55,9 +54,6 @@ module base() {
             translate([mechstart+middlescrewdistance, basewidth/2, thickness-0.01]) paddlescrewhole();
             
             $fn=20;
-            * for (p = basenutpos) {
-                translate([mechstart+p, basewidth/2, -1]) cylinder(d=2.6, h=8);
-            }
             
             // Cable duct
             translate([mechstart+10, basewidth/2, -2.01]) {
@@ -131,11 +127,6 @@ module base() {
         translate([grubscrewpos-(pluglength/2), 0, 0]) cube([pluglength, 1.5, 4]);
         translate([grubscrewpos-(pluglength/2), basewidth-plugwidth, 0]) cube([pluglength, plugwidth, 4]);
 
-       * for (p = basenutpos) {
-            translate([mechstart+p, basewidth/2, thickness-0.01]) {
-                basenut();
-            }
-        }
         
         
         // lower skirt
