@@ -34,6 +34,7 @@ use<lib/screwhole.scad>
 width=25;
 length=62;
 thickness=3;
+casethickness=2;
 jacksupportdepth=2;
 jacksupportwidth=6.5;
 
@@ -43,7 +44,6 @@ basescrewheaddiam=4.2;
 basescrewheadheight=1.5;
 basenutpos = [0, 10];
 
-casethickness=2;
 caseheight=thickness+basescrewheight;
 caselowerthingiewidth=1.8;
 casehole_width=17;
