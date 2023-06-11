@@ -42,8 +42,6 @@ baselength=length-casethickness;
 
 module base() {
 
-    %paddles();
-    
     baseplate_all();
     paddle_fixtures();
     middle_contact_fixture();
