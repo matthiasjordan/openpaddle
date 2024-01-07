@@ -25,7 +25,7 @@ module bottom() {
                 screwblock=5.5;
                 stopperheight=skirtheight-0.5;
                 translate([stopperx, (basewidth-stopperwidth)/2+stopperwidth-screwblock, -skirtheight]) cube([screwblock, screwblock, stopperheight]);
-                translate([stopperx, (basewidth-stopperwidth)/2, -skirtheight]) cube([3, stopperwidth, stopperheight]);
+                //translate([stopperx, (basewidth-stopperwidth)/2, -skirtheight]) cube([3, stopperwidth, stopperheight]);
             }
             
             // base nuts

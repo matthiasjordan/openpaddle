@@ -49,8 +49,8 @@ module base() {
     module baseplate_all() {
         difference() {
             baseplate();
-            translate([mechstart, border, thickness-0.01]) paddlescrewhole();
-            translate([mechstart, basewidth-border, thickness-0.01]) paddlescrewhole();
+            translate([mechstart, border, thickness-0.01]) nuthole();
+            translate([mechstart, basewidth-border, thickness-0.01]) nuthole();
             translate([mechstart+middlescrewdistance, basewidth/2, thickness-0.01]) paddlescrewhole();
             
             $fn=20;
@@ -69,9 +69,9 @@ module base() {
 
     module paddle_fixtures() {
         // Fixture for left paddle
-        translate([mechstart, border, thickness-0.01]) ringWithScrew(h=rheight);
+        translate([mechstart, border, thickness-0.01]) ring(h=rheight);
         // Fixture for right paddle
-        translate([mechstart, basewidth-border, thickness-0.01]) ringWithScrew(h=rheight);
+        translate([mechstart, basewidth-border, thickness-0.01]) ring(h=rheight);
     }
 
     
@@ -169,23 +169,16 @@ module base() {
 
     module ringWithScrew(h=ring_height) {
         paddle_ring(h+0.01);
-        %translate([0,0,basescrewheight-1]) rotate([180, 0, 0]) xscrew(basescrewdiam, basescrewheight);
+        %translate([0,0,basescrewheight-1]) rotate([180, 0, 0]) xscrew();
     }
 
-
-    module paddlescrewhole() {
-        $fn=20;
-        translate([0,0,basescrewheight-1]) rotate([180, 0, 0]) screwhole(screwdiam=basescrewdiam+0.5, headconeheight=0, headheight=thickness+5.5, shankheight=basescrewheight, headdiam=basescrewheaddiam+0.5);
+    module ring(h=ring_height) {
+        paddle_ring(h+0.01);
     }
 
-
-
-
-    module xscrew(d, h) {
-        $fn=20;
-        screwhole(screwdiam=d, headconeheight=0, headheight=basescrewheadheight, shankheight=h, headdiam=basescrewheaddiam);
+    module nuthole() {
+        translate([0, 0, -1]) rotate([180,0,0]) paddle_nut_hole();
     }
-
 
     module trsjack() {
         ebs35();
