@@ -27,8 +27,8 @@
 
 
 use<BOLTS/BOLTS.scad>
-use<lib/cableshoe.scad>
-use<lib/screwhole.scad>
+use<../lib/cableshoe.scad>
+use<../lib/screwhole.scad>
 
 
 width=25;

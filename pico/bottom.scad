@@ -1,5 +1,5 @@
-include<common.scad>
-use<case.scad>
+include<../common/common.scad>
+use<../common/case.scad>
 use<base.scad>
 use<dl4mat/RasPiPico/picowithstuff.scad>
 

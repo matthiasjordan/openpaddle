@@ -27,8 +27,6 @@
 
 
 include<common.scad>
-use<base.scad>
-use<lib/trsjack_ebs35.scad>
 
 
 
