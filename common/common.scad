@@ -27,8 +27,8 @@
 
 
 use<BOLTS/BOLTS.scad>
-use<lib/cableshoe.scad>
-use<lib/screwhole.scad>
+use<../lib/cableshoe.scad>
+use<../lib/screwhole.scad>
 
 
 width=25;
@@ -38,16 +38,19 @@ casethickness=2;
 jacksupportdepth=2;
 jacksupportwidth=6.5;
 
+
+
 basescrewdiam = 2.5;
 basescrewheight=16;
 basescrewheaddiam=4.2;
 basescrewheadheight=1.5;
 basenutpos = [0, 10];
+basewidth=width-2*casethickness;
+baselength=length-casethickness;
 
 caseheight=thickness+basescrewheight;
 caselowerthingiewidth=1.8;
 casehole_width=17;
-
 
 
 paddlelength=52;
@@ -73,12 +76,30 @@ mechstart=20;
 border=3;
 
 
+picopcbheight=1;
+picopcbwidth=21;
+picopcblength=51;
+picopcbpos=6.2;
+skirtheight=9;
+skirtendplatewidth=picopcbwidth+1.0;
+skirtrailheight=picopcbheight;
+skirtrailgap=0.5;
+stopperwidth=picopcbwidth-4;
+stopperx=picopcblength;
+stopperscrewx=stopperx+3;
+stopperscrewy=16.5;
+
 
 ring_height=0.5;
 rheight=ring_height+cableshoeheight+nutheight;
 
 
 screwholediam = basescrewdiam+0.1;
+
+
+lowerheight=5;
+
+fullassemblyheight=caseheight+skirtheight;
 
 
 module paddle_nut() {
@@ -100,4 +121,14 @@ module basenut() {
         paddle_nut_hole();
     }
    translate([0,0,2.29]) cylinder(r=r, h=0.5);    
+}
+
+module xscrew(d=basescrewdiam, h=basescrewheight) {
+    $fn=20;
+    screwhole(screwdiam=d, headconeheight=0, headheight=basescrewheadheight, shankheight=h, headdiam=basescrewheaddiam);
+}
+
+module paddlescrewhole() {
+    $fn=20;
+    translate([0,0,basescrewheight-1]) rotate([180, 0, 0]) screwhole(screwdiam=basescrewdiam+0.5, headconeheight=0, headheight=thickness+5.5, shankheight=basescrewheight, headdiam=basescrewheaddiam+0.5);
 }

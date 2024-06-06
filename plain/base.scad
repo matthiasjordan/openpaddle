@@ -26,9 +26,9 @@
 //////////////////////////////////////////////////////////////////////
 
 
-include<common.scad>
+include<../common/common.scad>
 use<paddle.scad>
-use<lib/trsjack_ebs35.scad>
+use<../lib/trsjack_ebs35.scad>
 
 
 

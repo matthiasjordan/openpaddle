@@ -9,7 +9,7 @@ It goes without saying but this is free software. If you don't have the TRS jack
 
 ## Bill of materials
 
-There is some [additional hardware needed](BOM.txt) to build this project. Some pieces are mandatory to build the paddle but others are optional and can be omitted when certain features are not needed.
+There is some [additional hardware needed](BOM.md) to build this project. Some pieces are mandatory to build the paddle but others are optional and can be omitted when certain features are not needed.
 
 
 ## How to build

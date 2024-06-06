@@ -27,8 +27,6 @@
 
 
 include<common.scad>
-use<base.scad>
-use<lib/trsjack_ebs35.scad>
 
 
 
@@ -118,10 +116,14 @@ module case() {
             translate([mechstart+middlescrewdistance, width/2, caseheight-nutheight]) bar(2);
         }
         
+        module paddle_screw_hole() {
+            translate([0,0,-0.5]) rotate([180, 0, 0]) paddlescrewhole();
+        }
+        
         difference() {
             foo();
-            translate([mechstart, caseborder, caseheight-nutheight]) paddle_nut_hole();
-            translate([mechstart, width-caseborder, caseheight-nutheight]) paddle_nut_hole();
+            translate([mechstart, caseborder, caseheight-nutheight]) paddle_screw_hole();
+            translate([mechstart, width-caseborder, caseheight-nutheight]) paddle_screw_hole();
             translate([mechstart+middlescrewdistance, width/2, caseheight-nutheight]) paddle_nut_hole();
         }
     }

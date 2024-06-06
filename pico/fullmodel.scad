@@ -26,10 +26,10 @@
 //////////////////////////////////////////////////////////////////////
 
 
-include<common.scad>
+include<../common/common.scad>
 use<paddle.scad>
 use<base.scad>
-use<case.scad>
+use<../common/case.scad>
 use<bottom.scad>
 
 fullmodel();

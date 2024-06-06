@@ -20,19 +20,14 @@
 //////////////////////////////////////////////////////////////////////
 //
 //
-//  The right paddle.
-//
-//  This model needs to be mirrored to make the left paddle.
+//  Common modules for the right paddle.
 //
 //
 //////////////////////////////////////////////////////////////////////
 
 
-include<common.scad>
+include<../common/common.scad>
 
-
-
-paddle();
 
 
 
@@ -91,7 +86,7 @@ module paddle(length=paddlelength) {
             }
             
             // Tip
-            translate([length-paddletiplength, -paddlethickness, paddleheight-paddletipheight]) cube([paddletiplength,2.5, paddletipheight]);
+            translate([length-paddletiplength, -paddlethickness, paddleheight-paddletipheight]) tip();
         }
     }
 
@@ -115,6 +110,8 @@ module paddle(length=paddlelength) {
     }
     
 }
+
+
 
 
 
